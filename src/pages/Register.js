@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, setNewUsers } from "../Redux_thunk/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { users, newUsers } = useSelector((store) => store.users);
-  const URL = "http://localhost:4000/users";
+  const { newUsers } = useSelector((store) => store.users);
+
   const history = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +20,8 @@ const Register = () => {
       email: newUsers.email,
       password: newUsers.password,
     };
-    return dispatch(createUser(newUser)), history("/");
+
+    return dispatch(createUser(newUser)), history("/login");
   };
 
   return (
@@ -64,6 +65,9 @@ const Register = () => {
           >
             Register
           </button>
+          <p>
+            already have an account <Link to="/login">Login </Link>
+          </p>
         </div>
       </form>
     </div>

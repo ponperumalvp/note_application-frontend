@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { setIsLogin } from "../Redux_thunk/userSlice";
+import { useDispatch } from "react-redux";
 
 const nav_links = [
   {
@@ -18,6 +20,7 @@ const nav_links = [
 ];
 
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <div className="bg-slate-400 w-[100%] h-[60px] flex items-center">
       <div className="container ">
@@ -32,6 +35,13 @@ const Header = () => {
               );
             })}
           </div>
+          <button
+            onClick={() => {
+              dispatch(setIsLogin(false));
+            }}
+          >
+            <Link to="/login">Logout</Link>
+          </button>
         </div>
       </div>
     </div>

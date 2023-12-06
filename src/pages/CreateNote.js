@@ -7,9 +7,7 @@ import { format } from "date-fns";
 const CreateNote = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { notes, newNotes } = useSelector((store) => store.notes);
-
-  const URL = "http://localhost:4000/notes";
+  const { newNotes } = useSelector((store) => store.notes);
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -22,13 +20,16 @@ const CreateNote = () => {
 
     // const id = notes.length ? notes[notes.length - 1].id + 1 : 1;
     const date = format(new Date(), "MMMM dd , yyyy pp");
-
+    const userOwner = window.localStorage.getItem("userId");
+    console.log(userOwner);
     const newNote = {
       // id,
       date,
       title: newNotes.title,
       content: newNotes.content,
+      userOwner,
     };
+    console.log(newNote);
     return (
       dispatch(createNote(newNote)), console.log("sucessful"), history("/")
     );

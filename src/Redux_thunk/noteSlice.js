@@ -14,7 +14,8 @@ export const createNote = createAsyncThunk(
   "notes/createNotes",
   async (postData, thunkAPI) => {
     try {
-      const res = await axios.post(URL, postData);
+      console.log(postData);
+      const res = await axios.post(`${URL}/createNote`, postData);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
@@ -27,7 +28,9 @@ export const getNotes = createAsyncThunk(
 
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get(URL);
+      const userId = window.localStorage.getItem("userId");
+      const res = await axios.get(`${URL}/getNote/${userId}`);
+      console.log(res.data);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
@@ -56,6 +59,7 @@ const noteSlice = createSlice({
 
     [createNote.pending]: (state, action) => {},
     [createNote.fulfilled]: (state, action) => {
+      console.log(state.notes);
       state.notes = [...state.notes, action.payload];
     },
     [createNote.rejected]: (state, action) => {
