@@ -19,19 +19,17 @@ const Login = () => {
     dispatch(setExistUsers({ ...existUsers, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const existUser = {
       email: existUsers.email,
       password: existUsers.password,
     };
-    return (
-      dispatch(verifyUser(existUser)),
-      dispatch(setIsLogin(true)),
-      console.log("login successs"),
-      history("/")
-    );
+    await dispatch(verifyUser(existUser));
+    dispatch(setIsLogin(true));
+    console.log("login successs");
+    history("/");
   };
   return (
     <div>

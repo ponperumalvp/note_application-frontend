@@ -29,8 +29,9 @@ export const getNotes = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const userId = window.localStorage.getItem("userId");
+      console.log("getNotes userid: ", userId);
       const res = await axios.get(`${URL}/getNote/${userId}`);
-      console.log(res.data);
+      console.log("getnotes data : ", res.data);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
