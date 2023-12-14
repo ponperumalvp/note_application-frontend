@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote, setNewNotes } from "../Redux_thunk/noteSlice";
 import { format } from "date-fns";
+import { getItem } from "../localStorage/getItem/getItem";
 
 const CreateNote = () => {
   const history = useNavigate();
@@ -20,7 +21,7 @@ const CreateNote = () => {
 
     // const id = notes.length ? notes[notes.length - 1].id + 1 : 1;
     const date = format(new Date(), "MMMM dd , yyyy pp");
-    const userOwner = window.localStorage.getItem("userId");
+    const userOwner = getItem("userId");
     console.log(userOwner);
     const newNote = {
       // id,

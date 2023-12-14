@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import { setItem } from "../localStorage/seItem/setItem";
 const URL = "http://localhost:4000/users";
 
 const initialState = {
@@ -12,11 +13,19 @@ const initialState = {
 };
 
 export const createUser = createAsyncThunk(
-  "notes/createNotes",
+  "users/createUser",
   async (postData, thunkAPI) => {
     try {
       const res = await axios.post(`${URL}/register`, postData);
-      window.localStorage.setItem("userId", res.data.userId);
+      console.log(res.data.message);
+      if (res.data.message === "register successful") {
+        await setItem("userId", res.data.userId);
+        await setItem("accessToken", res.data.token);
+        toast.success(res.data.message);
+        return "verifyed";
+      } else {
+        return "verification failed";
+      }
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
     }
@@ -24,12 +33,19 @@ export const createUser = createAsyncThunk(
 );
 
 export const verifyUser = createAsyncThunk(
-  "notes/verifyUser",
+  "users/verifyUser",
   async (postData, thunkAPI) => {
     try {
       const res = await axios.post(`${URL}/login`, postData);
-      console.log(postData);
-      window.localStorage.setItem("userId", res.data.userId);
+
+      if (res.data.message === "login successful") {
+        await setItem("userId", res.data.userId);
+        await setItem("accessToken", res.data.token);
+        toast.success(res.data.message);
+        return "verifyed";
+      } else {
+        return "verification failed";
+      }
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
     }

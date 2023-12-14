@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getItem } from "../localStorage/getItem/getItem";
 
 const URL = "http://localhost:4000/notes";
 
@@ -14,8 +15,9 @@ export const createNote = createAsyncThunk(
   "notes/createNotes",
   async (postData, thunkAPI) => {
     try {
-      console.log(postData);
-      const res = await axios.post(`${URL}/createNote`, postData);
+      const res = await axios.post(`${URL}/createNote`, postData, {
+        headers: { authorization: getItem("accessToken") },
+      });
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
@@ -28,10 +30,9 @@ export const getNotes = createAsyncThunk(
 
   async (_, thunkAPI) => {
     try {
-      const userId = window.localStorage.getItem("userId");
-      console.log("getNotes userid: ", userId);
+      const userId = await getItem("userId");
+      console.log("userId", userId);
       const res = await axios.get(`${URL}/getNote/${userId}`);
-      console.log("getnotes data : ", res.data);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });

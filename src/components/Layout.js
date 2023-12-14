@@ -2,12 +2,20 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Routing from "../Router/Routing";
+import { useSelector } from "react-redux";
 const Layout = () => {
+  const { isLogin } = useSelector((store) => store.users);
   return (
     <div className="container">
-      <Header />
-      <Routing />
-      <Footer />
+      {isLogin ? (
+        <>
+          <Header />
+          <Routing />
+          <Footer />
+        </>
+      ) : (
+        <Routing />
+      )}
     </div>
   );
 };

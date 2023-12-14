@@ -2,16 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotes } from "../Redux_thunk/noteSlice";
 import { useEffect } from "react";
+import { getItem } from "../localStorage/getItem/getItem";
+import { useNavigate } from "react-router-dom";
+import { loginCheck } from "../util";
 
 const Home = () => {
   const { notes } = useSelector((store) => store.notes);
   const dispatch = useDispatch();
+
   useEffect(() => {
+    loginCheck("login");
     const getData = () => {
       dispatch(getNotes());
     };
     getData();
-    console.log("home useeffect");
   }, [dispatch]);
 
   return (

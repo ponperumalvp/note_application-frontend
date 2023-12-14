@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
 import "./App.css";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 
 const App = () => {
-  const { isLogin } = useSelector((store) => store.users);
   return (
-    <div className="App bg-slate-400">
-      <div>{isLogin ? <Layout /> : <Login />}</div>
+    <div className="App bg-gradient-to-br from-red-100  to-green-100">
+      {/* <div>{isLogin ? <Layout /> : <Login />}</div> */}
+      <Layout />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { setIsLogin } from "../Redux_thunk/userSlice";
 import { useDispatch } from "react-redux";
+import { removeItem } from "../localStorage/removeItem/removeItem";
 
 const nav_links = [
   {
@@ -20,6 +21,11 @@ const nav_links = [
 ];
 
 const Header = () => {
+  const handleLogout = () => {
+    removeItem("userId");
+    removeItem("accessToken");
+    dispatch(setIsLogin(false));
+  };
   const dispatch = useDispatch();
   return (
     <div className="bg-slate-400 w-[100%] h-[60px] flex items-center">
@@ -35,13 +41,7 @@ const Header = () => {
               );
             })}
           </div>
-          <button
-            onClick={() => {
-              dispatch(setIsLogin(false));
-            }}
-          >
-            <Link to="/login">Logout</Link>
-          </button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>

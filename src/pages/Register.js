@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser, setNewUsers } from "../Redux_thunk/userSlice";
+import { createUser, setIsLogin, setNewUsers } from "../Redux_thunk/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -13,7 +13,7 @@ const Register = () => {
     dispatch(setNewUsers({ ...newUsers, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newUser = {
       userName: newUsers.userName,
@@ -21,11 +21,16 @@ const Register = () => {
       password: newUsers.password,
     };
 
-    return dispatch(createUser(newUser)), history("/login");
+    const res = await dispatch(createUser(newUser));
+    console.log("register", res);
+    (await res.payload) === "verifyed"
+      ? dispatch(setIsLogin(true))
+      : dispatch(setIsLogin(false));
+    history("/");
   };
 
   return (
-    <div className=" container w-[100%] mt-20 flex items-center justify-center">
+    <div className=" container w-[100%] h-[100vh] mt-20 flex items-center justify-center">
       <form
         className="flex  w-[500px] flex-col h-[400px] bg-slate-400"
         onSubmit={handleSubmit}
@@ -66,7 +71,13 @@ const Register = () => {
             Register
           </button>
           <p>
-            already have an account <Link to="/login">Login </Link>
+            already have an account{" "}
+            <Link
+              to="/login"
+              className="bg-red-300 rounded-lg ml-2 text-white p-1"
+            >
+              Login{" "}
+            </Link>
           </p>
         </div>
       </form>

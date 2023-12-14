@@ -20,22 +20,29 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      console.log("login enter");
 
-    const existUser = {
-      email: existUsers.email,
-      password: existUsers.password,
-    };
-    await dispatch(verifyUser(existUser));
-    dispatch(setIsLogin(true));
-    console.log("login successs");
-    history("/");
+      const existUser = {
+        email: existUsers.email,
+        password: existUsers.password,
+      };
+      const resp = await dispatch(verifyUser(existUser));
+      console.log("verifyuser", resp);
+      resp.payload === "verifyed"
+        ? dispatch(setIsLogin(true))
+        : dispatch(setIsLogin(false));
+      history("/");
+    } catch (err) {
+      console.log("login err:", err);
+    }
   };
   return (
     <div>
-      <div className=" container w-[100%] mt-20 flex items-center justify-center h-[100%]">
+      <div className=" container w-[100%] mt-10 flex items-center justify-center h-[100vh]  bg-transparent">
         <form
-          className="flex  w-[500px] flex-col h-[400px] bg-slate-400"
+          className="flex  w-[500px] flex-col h-[400px] shadow-2xl rounded-lg bg-gray-200 "
           onSubmit={handleSubmit}
         >
           <input
@@ -45,7 +52,7 @@ const Login = () => {
             required
             value={existUsers.email}
             onChange={handleChange}
-            className="m-5 h-10 mt-14"
+            className="m-5 h-10 mt-20 bg-green-50 focus:outline-none"
           />
           <input
             type="password"
@@ -54,7 +61,7 @@ const Login = () => {
             required
             value={existUsers.password}
             onChange={handleChange}
-            className="m-5 h-10"
+            className="m-5 h-10 mt-5 bg-green-50 focus:outline-none"
           />
           <div className="text-center mt-10 ">
             <button
@@ -63,18 +70,13 @@ const Login = () => {
             >
               Login
             </button>
-            <p
-              onClick={() => {
-                dispatch(setIsLogin(true));
-              }}
-              className="mt-6"
-            >
+            <p className="mt-10">
               if you don't have account
               <Link
-                to="/register"
+                to="/"
                 className="bg-red-300 rounded-lg ml-2 text-white p-1"
               >
-                sign in
+                sign up
               </Link>
             </p>
           </div>
