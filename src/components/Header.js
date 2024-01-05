@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { setIsLogin } from "../Redux_thunk/userSlice";
 import { useDispatch } from "react-redux";
 import { removeItem } from "../localStorage/removeItem/removeItem";
+import { pathNavigatore } from "../util";
 
 const nav_links = [
   {
@@ -25,6 +26,7 @@ const Header = () => {
     removeItem("userId");
     removeItem("accessToken");
     dispatch(setIsLogin(false));
+    pathNavigatore("");
   };
   const dispatch = useDispatch();
   return (

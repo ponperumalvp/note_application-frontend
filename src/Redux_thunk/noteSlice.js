@@ -7,7 +7,7 @@ const URL = "http://localhost:4000/notes";
 const initialState = {
   notes: [],
   newNotes: "",
-
+  search: "",
   errMsg: "",
 };
 
@@ -15,6 +15,7 @@ export const createNote = createAsyncThunk(
   "notes/createNotes",
   async (postData, thunkAPI) => {
     try {
+      console.log(postData);
       const res = await axios.post(`${URL}/createNote`, postData, {
         headers: { authorization: getItem("accessToken") },
       });
@@ -46,6 +47,10 @@ const noteSlice = createSlice({
   reducers: {
     setNewNotes: (state, action) => {
       state.newNotes = action.payload;
+      console.log(action.payload);
+    },
+    setSearch: (state, action) => {
+      state.search = action.payload;
     },
   },
   extraReducers: {
@@ -61,8 +66,8 @@ const noteSlice = createSlice({
 
     [createNote.pending]: (state, action) => {},
     [createNote.fulfilled]: (state, action) => {
-      console.log(state.notes);
       state.notes = [...state.notes, action.payload];
+      console.log(state.notes);
     },
     [createNote.rejected]: (state, action) => {
       state.errMsg = action.payload.errMsg;
@@ -70,6 +75,6 @@ const noteSlice = createSlice({
   },
 });
 
-export const { setNewNotes } = noteSlice.actions;
+export const { setNewNotes, setSearch } = noteSlice.actions;
 
 export const noteReducer = noteSlice.reducer;

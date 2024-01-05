@@ -16,6 +16,7 @@ export const createUser = createAsyncThunk(
   "users/createUser",
   async (postData, thunkAPI) => {
     try {
+      console.log(postData);
       const res = await axios.post(`${URL}/register`, postData);
       console.log(res.data.message);
       if (res.data.message === "register successful") {

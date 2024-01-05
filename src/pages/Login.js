@@ -6,6 +6,10 @@ import {
   setIsLogin,
 } from "../Redux_thunk/userSlice";
 import { Link, useNavigate } from "react-router-dom";
+import Input from "../components/Input";
+import loginImg from "../assets/images/signup.png";
+import Button from "../components/button/Button";
+import login from "../assets/images/login.jpg";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,16 +22,17 @@ const Login = () => {
     const { name, value } = e.target;
     dispatch(setExistUsers({ ...existUsers, [name]: value }));
   };
+  console.log(existUsers);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log("login enter");
 
       const existUser = {
         email: existUsers.email,
         password: existUsers.password,
       };
+      console.log(existUser);
       const resp = await dispatch(verifyUser(existUser));
       console.log("verifyuser", resp);
       resp.payload === "verifyed"
@@ -39,46 +44,48 @@ const Login = () => {
     }
   };
   return (
-    <div>
-      <div className=" container w-[100%] mt-10 flex items-center justify-center h-[100vh]  bg-transparent">
+    <div className="container mx-auto">
+      <div className="m-10 px-auto justify-center flex items-center gap-40 md:flex-row flex-col">
+        <div className="border-4 border-#E8E8E8 w-[90%] md:w-[50%] lg:w-[25%] h-[600px] flex items-center justify-center  flex-col rounded-[5rem]  shadow-2xl ">
+          <h2 className="text-xl lg:text-3xl font-semibold m-4 text-center p-2">
+            Welcome to the Notes
+          </h2>
+          <img
+            src={login}
+            alt="image"
+            className="w-[90%] lg:w-[100%] md:w-[100%] "
+          />
+        </div>
         <form
-          className="flex  w-[500px] flex-col h-[400px] shadow-2xl rounded-lg bg-gray-200 "
+          className="border-4 border-#E8E8E8 w-[90%] md:w-[60%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[5rem]  shadow-2xl"
           onSubmit={handleSubmit}
         >
-          <input
+          <img src={loginImg} alt="image" />
+          <h2 className="text-3xl font-semibold mt-4">Login Notes</h2>
+          <Input
             type="text"
             name="email"
             placeholder="Email"
-            required
             value={existUsers.email}
             onChange={handleChange}
-            className="m-5 h-10 mt-20 bg-green-50 focus:outline-none"
           />
-          <input
+          <Input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             required
             value={existUsers.password}
             onChange={handleChange}
-            className="m-5 h-10 mt-5 bg-green-50 focus:outline-none"
           />
-          <div className="text-center mt-10 ">
-            <button
-              type="submit"
-              className="bg-red-300 p-3 rounded-lg text-white"
-            >
-              Login
-            </button>
-            <p className="mt-10">
-              if you don't have account
-              <Link
-                to="/"
-                className="bg-red-300 rounded-lg ml-2 text-white p-1"
-              >
-                sign up
-              </Link>
-            </p>
+
+          <div className="w-[100%] flex items-center justify-center mt-8">
+            <Button variant="primary">Login</Button>
+          </div>
+          <p className="text-center mt-10">If You Don't Have Account</p>
+          <div className="w-[60%] flex justify-center">
+            <Button>
+              <Link to="/">Register</Link>
+            </Button>
           </div>
         </form>
       </div>

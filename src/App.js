@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 
 const App = () => {
   return (
-    <div className="App bg-gradient-to-br from-red-100  to-green-100">
+    <div className="App bg-gradient-to-br from-red-100  to-green-100 container mx-auto">
       {/* <div>{isLogin ? <Layout /> : <Login />}</div> */}
       <Layout />
     </div>
