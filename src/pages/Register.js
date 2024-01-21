@@ -36,10 +36,14 @@ const Register = () => {
 
   return (
     <div className="container mx-auto ">
-      <div className=" m-10 px-auto justify-center flex items-center gap-40 md:flex-row flex-col">
-        <div className="border-4 border-#E8E8E8 w-[90%] md:w-[90%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[5rem]  shadow-2xl ">
+      <div className=" mt-10 px-auto justify-center flex items-center gap-40 md:flex-row flex-col">
+        <div className="border-4 border-br1  w-[90%] md:w-[90%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[3rem] bg  shadow-2xl bg-white ">
           <div>
-            <img src={googleSignin} alt="image" className="mt-36 w-24" />
+            <img
+              src={googleSignin}
+              alt="image"
+              className="mt-36 w-24 text-bgClr1"
+            />
           </div>
           <h2 className="text-3xl font-semibold mt-4">Welcome!</h2>
           <p className="text-[15px] tracking-wide font-normal text-center mt-3 text-zinc-500">
@@ -47,14 +51,18 @@ const Register = () => {
             with google
           </p>
 
-          <Button children="google signin" />
+          <div className="w-[90%] mt-5">
+            <Button children="google signin" variant="primary" />
+          </div>
         </div>
         <form
-          className="border-4 border-#E8E8E8 w-[90%] md:w-[90%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[5rem]  shadow-2xl"
+          className=" border w-[90%] md:w-[90%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[3rem]  shadow-2xl  bg-bgClr1"
           onSubmit={handleSubmit}
         >
-          <img src={signup} alt="image" className="mt-2" />
-          <h2 className="text-3xl font-semibold mt-4">Join Notes</h2>
+          <img src={signup} alt="image" className="mt-2 " />
+          <h2 className="text-3xl font-semibold mt-4 text-textClr">
+            Join Notey
+          </h2>
           <Input
             placeholder="Name"
             name="userName"
@@ -80,16 +88,18 @@ const Register = () => {
             value={newUsers.password}
             onChange={handleChange}
           />
-          <div className="w-[100%] flex items-center justify-center mt-5">
-            <Button>Register</Button>
+          <div className="w-[90%] flex items-center justify-center mt-10">
+            <Button variant="primary" onclick={handleSubmit}>
+              Register
+            </Button>
           </div>
-          <div className="flex mt-4 items-center justify-center gap-2">
+          <div className="flex mt-4 items-center justify-center">
             <div className="border-[1px] border-zinc-400 w-[30%] h-[1px]"></div>
-            <p className="text-center ">Already Have Account</p>
+            <p className="text-center text-textClr  ">Already Have Account</p>
             <div className="border-[1px] border-zinc-400 w-[30%] h-[1px]"></div>
           </div>
 
-          <div className="w-[60%] flex justify-center">
+          <div className="w-[40%] flex justify-center mt-2">
             <Button>
               <Link to="/login">Login</Link>
             </Button>

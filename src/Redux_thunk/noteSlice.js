@@ -3,10 +3,11 @@ import axios from "axios";
 import { getItem } from "../localStorage/getItem/getItem";
 
 const URL = "http://localhost:4000/notes";
+const URI = "http://localhost:4000/bussinessNotes";
 
 const initialState = {
   notes: [],
-  newNotes: "",
+  bussinessNotes: [],
   search: "",
   errMsg: "",
 };
@@ -15,7 +16,6 @@ export const createNote = createAsyncThunk(
   "notes/createNotes",
   async (postData, thunkAPI) => {
     try {
-      console.log(postData);
       const res = await axios.post(`${URL}/createNote`, postData, {
         headers: { authorization: getItem("accessToken") },
       });
@@ -32,9 +32,68 @@ export const getNotes = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const userId = await getItem("userId");
-      console.log("userId", userId);
-      const res = await axios.get(`${URL}/getNote/${userId}`);
+
+      const res = await axios.get(`${URL}/getNote/${userId}`, {
+        headers: { authorization: getItem("accessToken") },
+      });
       return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue({ errMsg: err.message });
+    }
+  }
+);
+
+export const deleteNote = createAsyncThunk(
+  "personalNote/deletePersonalNote",
+  async (id, thunkAPI) => {
+    try {
+      const res = await axios.delete(`${URL}/deleteNote/${id}`, {
+        headers: { authorization: getItem("accessToken") },
+      });
+      return { id: id };
+    } catch (err) {
+      return thunkAPI.rejectWithValue({ errMsg: err.message });
+    }
+  }
+);
+
+export const createBussinessNote = createAsyncThunk(
+  "notes/createNotes",
+  async (postData, thunkAPI) => {
+    try {
+      const res = await axios.post(`${URI}/createBussinessNote`, postData, {
+        headers: { authorization: getItem("accessToken") },
+      });
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue({ errMsg: err.message });
+    }
+  }
+);
+export const getBussinessNotes = createAsyncThunk(
+  "bussinessNotes/getBussinessNotes",
+
+  async (_, thunkAPI) => {
+    try {
+      const userId = await getItem("userId");
+
+      const res = await axios.get(`${URI}/getBussinessNote/${userId}`, {
+        headers: { authorization: getItem("accessToken") },
+      });
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue({ errMsg: err.message });
+    }
+  }
+);
+export const deleteBussinessNote = createAsyncThunk(
+  "personalNote/deletePersonalNote",
+  async (id, thunkAPI) => {
+    try {
+      const res = await axios.delete(`${URI}/deleteBussinessNote/${id}`, {
+        headers: { authorization: getItem("accessToken") },
+      });
+      return { id: id };
     } catch (err) {
       return thunkAPI.rejectWithValue({ errMsg: err.message });
     }
@@ -57,7 +116,6 @@ const noteSlice = createSlice({
     [getNotes.pending]: (state, action) => {},
     [getNotes.fulfilled]: (state, action) => {
       state.notes = action.payload;
-      state.newNotes = "";
       state.errMsg = "";
     },
     [getNotes.rejected]: (state, action) => {
@@ -70,6 +128,40 @@ const noteSlice = createSlice({
       console.log(state.notes);
     },
     [createNote.rejected]: (state, action) => {
+      state.errMsg = action.payload.errMsg;
+    },
+    [createBussinessNote.pending]: (state, action) => {},
+    [createBussinessNote.fulfilled]: (state, action) => {
+      state.bussinessNotes = [...state.bussinessNotes, action.payload];
+    },
+    [createBussinessNote.rejected]: (state, action) => {
+      state.errMsg = action.payload.errMsg;
+    },
+    [getBussinessNotes.pending]: (state, action) => {},
+    [getBussinessNotes.fulfilled]: (state, action) => {
+      state.bussinessNotes = action.payload;
+
+      state.errMsg = "";
+    },
+    [getBussinessNotes.rejected]: (state, action) => {
+      state.errMsg = action.payload.errMsg;
+    },
+    [deleteNote.pending]: (state, action) => {},
+    [deleteNote.fulfilled]: (state, action) => {
+      state.notes = state.notes.filter((note) => {
+        return note.id !== action.payload.id;
+      });
+    },
+    [deleteNote.rejected]: (state, action) => {
+      state.errMsg = action.payload.errMsg;
+    },
+    [deleteBussinessNote.pending]: (state, action) => {},
+    [deleteBussinessNote.fulfilled]: (state, action) => {
+      state.notes = state.notes.filter((note) => {
+        return note.id !== action.payload.id;
+      });
+    },
+    [deleteBussinessNote.rejected]: (state, action) => {
       state.errMsg = action.payload.errMsg;
     },
   },

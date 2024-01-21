@@ -1,66 +1,49 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getNotes } from "../Redux_thunk/noteSlice";
 import { useEffect } from "react";
-import { getItem } from "../localStorage/getItem/getItem";
 import { Link, useNavigate } from "react-router-dom";
 import { loginCheck } from "../util";
-import Searchbar from "../components/Searchbar";
 import Content from "../shared/noteTool/Content";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import "../Masonry.css";
 
-const Home = () => {
-  const { notes } = useSelector((store) => store.notes);
+const Home = ({ children, getNotes, link }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     loginCheck("login");
     const getData = () => {
-      dispatch(getNotes());
+      dispatch(getNotes);
     };
     getData();
   }, [dispatch]);
 
-  const nav = [
-    { name: "Personal Note", path: "/PersonalNotes" },
-    { name: "Bussiness Note", path: "/createBussinessNote" },
-  ];
-
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-6">
-        <div className="col-span-1 bg-zinc-800 h-[100vh]">
-          <h2 className="text-3xl font-semibold my-10 text-white text-center">
-            Notes
-          </h2>
-          {nav.map((item, index) => {
-            return (
-              <>
-                <Link to={item.path} key={index}>
-                  <ul className="text-center m-4 ">
-                    <li className="text-white text-2xl">{item.name}</li>
-                  </ul>
-                </Link>
-              </>
-            );
-          })}
-        </div>
-        <div className="col-span-2 border-r-[1px] border-black">
-          <Searchbar />
-        </div>
-        <div>
-          {console.log(notes)}
-          {notes.map((note) => {
-            return (
-              <div>
-                {note.notes.map((e) => {
-                  return <Content e={e} />;
-                })}
-
-                {/* {note.notes.map((e) => e.data.text)} */}
-              </div>
-            );
-          })}
-        </div>
+    <div className="container mx-auto h-auto">
+      <div>
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
+        >
+          <Masonry>
+            {Boolean(children) && children.length ? (
+              children.map((note, idx) => {
+                return (
+                  Boolean(note) && (
+                    <Link to={`${link}${note._id}`} key={idx}>
+                      <div className=" border shadow-lg  m-6 bg-bgClr1 text-white min-h-[360px] rounded-2xl max-h-[360px] overflow-hidden text-ellipsis font-semibold text-[20px] text-center p-2 truncate ">
+                        {note.notes.map((e) => {
+                          return Boolean(e) && <Content e={e} />;
+                        })}
+                      </div>
+                    </Link>
+                  )
+                );
+              })
+            ) : (
+              <p>welcome</p>
+            )}
+          </Masonry>
+        </ResponsiveMasonry>
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ export const createUser = createAsyncThunk(
       if (res.data.message === "register successful") {
         await setItem("userId", res.data.userId);
         await setItem("accessToken", res.data.token);
+        await setItem("userName", res.data.userName);
         toast.success(res.data.message);
         return "verifyed";
       } else {
@@ -42,6 +43,7 @@ export const verifyUser = createAsyncThunk(
       if (res.data.message === "login successful") {
         await setItem("userId", res.data.userId);
         await setItem("accessToken", res.data.token);
+        await setItem("userName", res.data.userName);
         toast.success(res.data.message);
         return "verifyed";
       } else {

@@ -11,12 +11,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
 }
 :root {
-  --secondary: #e9ecef;
-  --primary: #ffffff;
-  background-color: #ffffff;
+  background-color: #0e1217;
   font-family: "Poppins", sans-serif;
 }
 .editor {
@@ -27,14 +24,11 @@
   margin: 50px auto;
 }
 
-body {
-  background: #f5f8fa;
-}
-
 #editorjs-container {
-  background-color: #f9f9f9;
+  background-color: black;
   padding: 20px 30px;
   margin-bottom: 20px;
+  color: white;
 }
 
 .ce-toolbar__content,

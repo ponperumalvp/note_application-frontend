@@ -4,3 +4,6 @@
 
 @layer components {
 }
+ol {
+  @apply list-decimal;
+}

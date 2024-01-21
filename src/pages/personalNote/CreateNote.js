@@ -84,17 +84,16 @@
 // export default CreateNote;
 
 import React, { useContext, useEffect } from "react";
-import { EditorContex } from "../shared/noteTool/EditorContexProvider";
-import Button from "../components/button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { createNote, setNewNotes } from "../Redux_thunk/noteSlice";
+import { EditorContex } from "../../shared/noteTool/EditorContexProvider";
+import Button from "../../components/button/Button";
+import { useDispatch } from "react-redux";
+import { createNote } from "../../Redux_thunk/noteSlice";
 import { useNavigate } from "react-router-dom";
-import { getItem } from "../localStorage/getItem/getItem";
+import { getItem } from "../../localStorage/getItem/getItem";
 
 const CreateNote = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
-  const { newNotes } = useSelector((store) => store.notes);
   const { initEditor, editorInstanceRef } = useContext(EditorContex);
   useEffect(() => {
     initEditor();
@@ -102,10 +101,7 @@ const CreateNote = () => {
 
   const handleClick = async () => {
     const data = await editorInstanceRef.current.save();
-    console.log(data);
-
     const notes = await data.blocks;
-    console.log(notes);
     const userOwner = getItem("userId");
     const newNotes = await {
       notes,
@@ -116,7 +112,7 @@ const CreateNote = () => {
   };
   return (
     <div className="container">
-      <div id="editorjs"></div>
+      <div id="editorjs" className="text-white"></div>
       <div>
         <Button variant="primary" children="Save Note" onclick={handleClick} />
       </div>

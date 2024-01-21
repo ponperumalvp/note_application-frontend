@@ -44,10 +44,10 @@ const Login = () => {
     }
   };
   return (
-    <div className="container mx-auto">
-      <div className="m-10 px-auto justify-center flex items-center gap-40 md:flex-row flex-col">
-        <div className="border-4 border-#E8E8E8 w-[90%] md:w-[50%] lg:w-[25%] h-[600px] flex items-center justify-center  flex-col rounded-[5rem]  shadow-2xl ">
-          <h2 className="text-xl lg:text-3xl font-semibold m-4 text-center p-2">
+    <div className="container mx-auto w-[100%] h-[100vh]">
+      <div className="px-auto flex flex-col justify-center  items-center gap-40 md:flex-row ">
+        <div className="border-4 border-br1 bg-bgClr1  w-[90%] md:w-[50%] lg:w-[25%] h-[600px] flex items-center justify-center  flex-col rounded-[3rem]  shadow-2xl mt-10">
+          <h2 className="text-xl lg:text-3xl font-semibold m-4 text-center text-textClr p-2">
             Welcome to the Notes
           </h2>
           <img
@@ -57,34 +57,46 @@ const Login = () => {
           />
         </div>
         <form
-          className="border-4 border-#E8E8E8 w-[90%] md:w-[60%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[5rem]  shadow-2xl"
+          className="border w-[90%] md:w-[60%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[3rem]  shadow-2xl mt-10 bg-bgClr1"
           onSubmit={handleSubmit}
         >
-          <img src={loginImg} alt="image" />
-          <h2 className="text-3xl font-semibold mt-4">Login Notes</h2>
-          <Input
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={existUsers.email}
-            onChange={handleChange}
-          />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            value={existUsers.password}
-            onChange={handleChange}
-          />
-
-          <div className="w-[100%] flex items-center justify-center mt-8">
-            <Button variant="primary">Login</Button>
+          <img src={loginImg} alt="image" className="mt-8" />
+          <h2 className="text-3xl font-semibold mt-4 text-textClr">
+            Login Notes
+          </h2>
+          <div className="w-[100%]">
+            <div className="">
+              <Input
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={existUsers.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mt-9">
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+                value={existUsers.password}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <p className="text-center mt-10">If You Don't Have Account</p>
-          <div className="w-[60%] flex justify-center">
+
+          <div className="w-[90%] flex items-center justify-center mt-10">
+            <Button variant="primary" onclick={handleSubmit}>
+              Login
+            </Button>
+          </div>
+          <p className="text-center mt-10 text-textClr">
+            If You Don't Have Account
+          </p>
+          <div className="w-[40%] flex justify-center mt-2">
             <Button>
-              <Link to="/">Register</Link>
+              <Link to="/register">Register</Link>
             </Button>
           </div>
         </form>
