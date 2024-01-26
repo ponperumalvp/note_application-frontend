@@ -4,7 +4,7 @@ import { createUser, setIsLogin, setNewUsers } from "../Redux_thunk/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/button/Button";
-import googleSignin from "../assets/images/googleSignin.png";
+import registerImg from "../assets/images/registerImg.png";
 import signup from "../assets/images/signup.png";
 
 const Register = () => {
@@ -37,22 +37,16 @@ const Register = () => {
   return (
     <div className="container mx-auto ">
       <div className=" mt-10 px-auto justify-center flex items-center gap-40 md:flex-row flex-col">
-        <div className="border-4 border-br1  w-[90%] md:w-[90%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[3rem] bg  shadow-2xl bg-white ">
+        <div className="border-4 border-br1  w-[90%] md:w-[90%] lg:w-[25%] h-[600px] flex items-center  flex-col rounded-[3rem] bg  shadow-2xl bg-bgClr1 ">
           <div>
+            <h2 className="text-xl lg:text-3xl font-semibold m-4 text-center text-textClr p-2">
+              Welcome to the Notey
+            </h2>
             <img
-              src={googleSignin}
+              src={registerImg}
               alt="image"
-              className="mt-36 w-24 text-bgClr1"
+              className=" flex items-center justify-center  object-fill"
             />
-          </div>
-          <h2 className="text-3xl font-semibold mt-4">Welcome!</h2>
-          <p className="text-[15px] tracking-wide font-normal text-center mt-3 text-zinc-500">
-            Capture your ideas quickly , access them from anywhere and sign in
-            with google
-          </p>
-
-          <div className="w-[90%] mt-5">
-            <Button children="google signin" variant="primary" />
           </div>
         </div>
         <form

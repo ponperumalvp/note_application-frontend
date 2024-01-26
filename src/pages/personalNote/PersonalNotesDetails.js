@@ -33,11 +33,6 @@ const PersonalNotesDetails = () => {
                 />
               </div>
               <NoteDetail note={note} key={index} />
-              <Button
-                children="Edit Note"
-                variant="primary"
-                link={`/editNote/${note._id}`}
-              />
             </div>
           );
         })}

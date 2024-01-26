@@ -48,7 +48,7 @@ const Login = () => {
       <div className="px-auto flex flex-col justify-center  items-center gap-40 md:flex-row ">
         <div className="border-4 border-br1 bg-bgClr1  w-[90%] md:w-[50%] lg:w-[25%] h-[600px] flex items-center justify-center  flex-col rounded-[3rem]  shadow-2xl mt-10">
           <h2 className="text-xl lg:text-3xl font-semibold m-4 text-center text-textClr p-2">
-            Welcome to the Notes
+            Welcome to the Notey
           </h2>
           <img
             src={login}
@@ -62,7 +62,7 @@ const Login = () => {
         >
           <img src={loginImg} alt="image" className="mt-8" />
           <h2 className="text-3xl font-semibold mt-4 text-textClr">
-            Login Notes
+            Login Notey
           </h2>
           <div className="w-[100%]">
             <div className="">

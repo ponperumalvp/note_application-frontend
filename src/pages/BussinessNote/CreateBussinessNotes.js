@@ -112,9 +112,18 @@ const CreateBussinessNotes = () => {
   };
   return (
     <div className="container">
-      <div id="editorjs"></div>
-      <div>
-        <Button variant="primary" children="Save Note" onclick={handleClick} />
+      <div className=" mt-10 mx-auto w-[50%]">
+        <div className="bg-white rounded-xl relative  ">
+          <div id="editorjs"></div>
+
+          <div className="w-[30%]  mx-auto  ">
+            <Button
+              variant="primary"
+              children="Save Note"
+              onclick={handleClick}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

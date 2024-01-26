@@ -31,13 +31,7 @@ const BussinessNotesDetails = () => {
                 />
               </div>
               <NoteDetail note={note} key={index} />{" "}
-              <div className="w-[30%] ">
-                <Button
-                  children="Edit Note"
-                  variant="primary"
-                  link={`/editNote/${note._id}`}
-                />
-              </div>
+              <div className="w-[30%] "></div>
             </div>
           );
         })}

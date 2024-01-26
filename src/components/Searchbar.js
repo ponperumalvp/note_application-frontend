@@ -1,10 +1,16 @@
 import * as Io5 from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../Redux_thunk/noteSlice";
+import { useEffect } from "react";
 
-const Searchbar = () => {
+const Searchbar = ({ children }) => {
   const dispatch = useDispatch();
   const { search } = useSelector((store) => store.notes);
+  useEffect(() => {
+    const filterresult = children.filter((note) =>
+      note.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [children, search]);
 
   const handleChange = (e) => {
     dispatch(setSearch(e.target.value));

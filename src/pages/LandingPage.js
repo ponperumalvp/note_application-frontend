@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../components/button/Button";
 import { Link } from "react-router-dom";
-import noteImg from "../assets/images/noteImg.png";
+import landingPageImg from "../assets/images/landingPageImg.png";
 import myImg from "../assets/images/myImg.jpg";
 
 const LandingPage = () => {
@@ -52,8 +52,8 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
-            <div className="">
-              <img src={noteImg} alt="" />
+            <div className="col-span-2">
+              <img src={landingPageImg} alt="" />
             </div>
           </div>
         </div>

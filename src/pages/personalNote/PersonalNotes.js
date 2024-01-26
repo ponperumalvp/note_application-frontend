@@ -11,8 +11,8 @@ const PersonalNotes = () => {
       <div className="">
         <Home children={notes} getNotes={getNotes()} link={"/"} />
       </div>
-      <div className="w-[20%] fixed bottom-0 end-0 m-4 z-2">
-        <Button variant="primary" children="CreateNote" link="/create" />
+      <div className="w-[20%] fixed bottom-4 end-4 m-4 z-2">
+        <Button children="CreateNote" link="/create" />
       </div>
     </div>
   );
