@@ -22,7 +22,6 @@ const Login = () => {
     const { name, value } = e.target;
     dispatch(setExistUsers({ ...existUsers, [name]: value }));
   };
-  console.log(existUsers);
 
   const handleSubmit = async (e) => {
     try {

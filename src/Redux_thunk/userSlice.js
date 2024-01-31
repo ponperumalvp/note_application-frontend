@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { setItem } from "../localStorage/seItem/setItem";
-const URL = "http://localhost:4000/users";
+const URL = "https://ponperumal-note-backend.onrender.com/users";
 
 const initialState = {
   users: [],

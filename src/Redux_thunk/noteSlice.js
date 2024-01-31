@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getItem } from "../localStorage/getItem/getItem";
 
-const URL = "http://localhost:4000/notes";
-const URI = "http://localhost:4000/bussinessNotes";
+const URL = "https://ponperumal-note-backend.onrender.com/notes";
+const URI = "https://ponperumal-note-backend.onrender.com/bussinessNotes";
 
 const initialState = {
   notes: [],
